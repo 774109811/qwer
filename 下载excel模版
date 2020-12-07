@@ -1,0 +1,116 @@
+在resources资源目录下创建需要的 templates模版
+
+packageservice.impl;
+
+import com.ResultBean;
+import com.util.ResourceCloseUtil;
+import com.ExpenseTypeEnum;
+import com.DataTemplateDownloadService;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.jetbrains.annotations.NotNull;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
+/**
+ * <p>
+ * 数据模板下载api实现
+ * </p>
+ */
+@Slf4j
+@Service
+public class DataTemplateDownloadServiceImpl implements DataTemplateDownloadService {
+    private static final String TEMPLATE_PATH = "templates";
+
+    private static final Map<ExpenseTypeEnum, String> TEMPLATE_NAME_MAP;
+
+    private static final Map<String, String> OTHER_TEMPLATE_NAME_MAP;
+
+    static {
+      
+        Map<String, String> otherMap = new HashMap<String, String>() {
+            {
+                put("program", "XXXXXX.xlsx");
+                put("subject", "XXXXXX.xlsx");
+            }
+        };
+        OTHER_TEMPLATE_NAME_MAP = Collections.unmodifiableMap(otherMap);
+    }
+
+
+    @Override
+    public ResultBean<Void> templateDownload(String key, HttpServletRequest request, HttpServletResponse response) {
+        log.info("download '" + key + "' template");
+        String fileName = OTHER_TEMPLATE_NAME_MAP.get(key);
+        return getVoidResultBean(request, response, fileName);
+    }
+
+    @Override
+    public InputStream getInputStream(ExpenseTypeEnum expenseTypeEnum) {
+        String fileName = TEMPLATE_NAME_MAP.get(expenseTypeEnum);
+        return getInputStream(fileName);
+    }
+
+    @NotNull
+    private ResultBean<Void> getVoidResultBean(HttpServletRequest request, HttpServletResponse response,
+            String fileName) {
+        XSSFWorkbook workbook = getWorkbook(fileName);
+        if (workbook == null)
+            return new ResultBean<>("模板读取失败", HttpStatus.INTERNAL_SERVER_ERROR.value(), null);
+        // 设置输出的格式
+        response.reset();
+        String userAgent = request.getHeader("User-Agent");
+        try {
+            if (userAgent.toUpperCase().contains("FIREFOX"))
+                fileName = new String(fileName.getBytes("UTF-8"), "ISO8859-1"); // firefox浏览器
+            else if (userAgent.toUpperCase().contains("EDGE") || userAgent.toUpperCase().contains("TRIDENT"))
+                fileName = URLEncoder.encode(fileName, "UTF-8");// IE浏览器
+            else if (userAgent.toUpperCase().contains("CHROME"))
+                fileName = new String(fileName.getBytes("UTF-8"), "ISO8859-1");// 谷歌
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            return new ResultBean<>("浏览器不支持", HttpStatus.INTERNAL_SERVER_ERROR.value(), null);
+        }
+
+        response.setHeader("Content-Disposition", "attachment;filename=" + fileName);
+        try {
+            workbook.write(response.getOutputStream());
+        } catch (IOException e) {
+            e.printStackTrace();
+            return new ResultBean<>("模板写出失败", HttpStatus.INTERNAL_SERVER_ERROR.value(), null);
+        }
+        return new ResultBean<>(HttpStatus.OK);
+    }
+
+    private InputStream getInputStream(String fileName) {
+        // 读到流中
+        InputStream inputStream = getClass().getClassLoader()
+                .getResourceAsStream(TEMPLATE_PATH + File.separator + fileName);
+        return inputStream;
+    }
+
+    private XSSFWorkbook getWorkbook(String fileName) {
+        XSSFWorkbook workbook = null;
+        InputStream in = null;
+        try {
+            in = getInputStream(fileName);
+            workbook = new XSSFWorkbook(in);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //关闭流
+        ResourceCloseUtil.close(in);
+        return workbook;
+    }
+}
