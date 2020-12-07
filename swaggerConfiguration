@@ -1,0 +1,105 @@
+package swagger.configuration;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+@Controller
+public class HomeController {
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String index() {
+        System.out.println("doc.html");
+        return "redirect:doc.html";
+    }
+}
+
+
+
+
+package swagger.configuration;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import springfox.documentation.builders.ApiInfoBuilder;
+import springfox.documentation.builders.PathSelectors;
+import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.service.ApiInfo;
+import springfox.documentation.service.Contact;
+import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
+//接口页面，正式环境屏蔽
+@Configuration
+@EnableSwagger2
+@ConditionalOnExpression("!'${spring.profiles.active}'.equals('pro')")
+public class SwaggerConfig {
+
+    @Value("${project.version}")
+    private String version;
+
+    @Value("${spring.application.name}")
+    private String applicationName;
+
+    @Bean
+    public Docket createMoudleApi() {
+        String moudleName = applicationName.split("-")[1];
+        return new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo(moudleName.toUpperCase()))
+                .groupName(moudleName.toUpperCase())
+                .select()
+                .apis(RequestHandlerSelectors.basePackage("com.huawei.computing.ioc." + moudleName.toLowerCase()))
+                .paths(PathSelectors.any())
+                .build();
+    }
+
+    ApiInfo apiInfo(String moudleName) {
+        String title = "Computing IOC " + moudleName + " openAPI";
+        return new ApiInfoBuilder().title(title)
+                .description(title + ".")
+                .license("Apache 2.0")
+                .termsOfServiceUrl("")
+                .version(version)
+                .contact(new Contact("Computing IOC team", "", "Computing IOC"))
+                .build();
+    }
+}
+
+web配置
+
+
+package com.huawei.computing.ioc.swagger.configuration;
+
+import com.huawei.computing.ioc.common.filter.ApiOriginFilter;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+/**
+ * web配置
+ */
+@Configuration
+public class WebConfigs {
+
+    /**
+     * 允许跨域
+     * 
+     * @return FilterRegistrationBean
+     */
+    @Bean
+    public FilterRegistrationBean<ApiOriginFilter> registerOriginFilter() {
+        FilterRegistrationBean<ApiOriginFilter> registration = new FilterRegistrationBean<ApiOriginFilter>(
+                new ApiOriginFilter());
+        registration.setName("crossOriginFilter");
+        registration.addUrlPatterns("/*");
+        registration.setOrder(Integer.MAX_VALUE);
+        return registration;
+    }
+}
+
+
+
+
+
+
+
