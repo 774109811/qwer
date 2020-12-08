@@ -1,0 +1,884 @@
+# 
+中间件
+solr实现 SolrClient
+redis和memacache区别
+redis理解
+数据类型特点
+redis分布式锁
+Spring Quartz
+定时任务重复执行
+项目应用场景
+kafuka MQ
+.在架构模型
+3.吞吐量
+4.可用性
+5.集群负载均衡
+spring框架
+Spring Bean生命周期
+缓存的Aop实现
+安全框架
+shiro理解
+网络
+tcp/udp
+TCP/IP：四层模型。
+（1）OSI：七层模型。
+http请求到响应的过程
+java基础
+设计模式
+创建线程的3中方式
+线程安全
+sleep和wait
+list
+hashmap
+hashMap和hashTable区别
+这是因为Hashtable使用的是安全失败机制（fail-safe），这种机制会使你此次读到的数据不一定是最新的数据。
+concrenthashmap
+熔断机制   ( 线程池)底层原理
+锁和线程池
+synchronized
+Volatile
+MESI
+嗅探特点
+缺点 总线风暴
+指令重排
+as-if-serial
+总结
+volatile与synchronized的区别
+string stringBufer stringBuilder
+4、应用场景
+java虚拟机的栈和堆
+说一下堆栈的区别？
+物理地址
+程序的可见度
+队列和栈是什么？有什么区别？
+对象创建过程
+JVM 调优
+jdk/bin目录
+常用的 JVM 调优的参数都有哪些？
+springBoot
+boot启动自动配置流程
+简要
+拦截器的执行顺序:
+ngInx
+TimerTask 和 Quartz比较
+MYSQL
+数据库的添加字段
+MySQL 都有哪些引擎
+事物
+查询一条sql怎么知道有没有加索引
+mysql怎么避免幻读的隔离级别
+mysql如何实现避免幻读
+什么是MVCC
+什么是next-key锁
+什么是快照读和当前读
+ORDER BY LIMIT
+1.优化sql语句
+索引
+索引在怎么情况下会失效
+优点
+缺点
+一般来说，应该在这些列上创建索引。
+视图
+视图类型
+web服务挂起时用什么工具检测
+Tomcat
+MYSQL 和 redis 事物的区别
+分布式事物怎么实现的
+MS总结
+数字签名:
+保证信息传输的完整性、发送者的身份认证、防止交易中的抵赖发生。 数字签名技术是将摘要信息用发送者的私钥加密,与原文一起传送给接收者。接收者只有用发送者的公钥才能解密被加密的摘要信息,然后用HASH函数对收到的原文产生一个摘要信息,与解密的摘要信息对比。如果相同,则说明收到的信息是完整的,在传输过程中没有被修改,否则说明信息被修改过,因此数字签名能够验证信息的完整性。 数字签名是个加密的过程,数字签名验证是个解密的过程
+
+前台Contrller在用户发起请求时用前台发来的数据接参例如:
+1,前台定义的返回值类型是EazyUItable类型,参数是总记录数和当前页的具体数据
+2,后台通过接受这几个参数,和返回值类型去数据库查询
+3,返回给页面
+问题:在查询完商品详情信息后,商品类目显示列为乱码,在jsp页面查找了很多标签的类型都是utf-8,都没错
+后来百度了一下在RequsetMapping里加了一个属性
+produces: 指定返回值类型，不但可以设置返回值类型还可以设定返回值的字符编码
+consumes：指定处理请求的提交内容类型（Content-Type），例如application/json, text/html;
+
+1,在查询时返回值类型为具体的对象,和消息状态值
+
+2,在删除和修改时返回值类型为一个封装的值对象,一个是msg,status,data对象
+
+
+3,文件上传(MultipartFile uploadFile)(两个工具,getname,transforto上传)
+ 1,获取图片信息
+ 2,对其验证,分文件储存,加密
+ 3,防止重名UUID
+ 4,上传路径用nginux实现反向代理
+ 5,上传
+ 6,前台的url和参数是uploadFile
+
+@PathVariable 是restful风格的注解
+
+单点登录系统
+实现redis 的缓存登录
+1.用户进行登录操作时,输入用户名和密码.
+2. JT-WEB接收用户请求时.将用户信息进行封装对用户密码进行加密,利用httpClient技术,发送给JT-SSO.单点登录系统.
+3. JT-SSO单点登录系统,接收前台数据之后进行校验.如果用户名和密码不正确.直接提示返回.
+4. 如果用户名和密码正确.首先生成加密的秘钥唯一key:token,之后将user转化为JSON数据.保存到Redis中.之后返回给JT-WEB  token数据.
+5. JT-WEB接收JT-SSO的返回值数据.把数据转化成对象,从这个对象中获取token数据,如果用户名密码不正确则友好提示给用户.
+如果用户名和密码正确,将token数据保存到用户浏览器的Cookie中.
+5.返回封装的对象
+6.当登录过后,跳转到主页面时,通过Ajax,Jsonp异步请求回显用户登录信息,同过redis获取token,用回调函数返回给页面.
+
+
+日志模块
+查看日志,通过url,和参数username和当前页的数据来查询数据库并返回封装的值对象
+删除日志根据url和ids
+
+添加日志切面
+1,添加一个日志的注解类
+2,添加一个日志的切面@around通知
+2.1 定义切入点和连接点
+2.2 在执行目标方法后执行添加日志的操作
+3,添加日志
+3.1 用户登录后信息是存在subject中的,从subject中获取用户信息
+3.2 用工具类获取用户RequestContextHolder.getRequestAttributes()).getRequest()获取request对象
+3.3 根据连接点获取方法签名
+3.4 获取类对象,获取目标方法名和参数
+3.5 获取目标方法上的注解的属性值(做了什么操作)
+3.6 获取执行时长
+3.7 设置创建的时长
+3.8 把参数封装成对象添加到数据库中
+
+
+实现秒杀业务
+1,在秒杀开始前 把要秒杀商品放入队列中.例如5个商品
+2,在redis中设置一个key,设置它的消亡时间.
+3,在用户访问时首先先拿到一个key,如果没有拿到就直接友好返回,拿到key的用户把用户id ,push进入到redis list集合中.
+4,然后从list集合中pop出第一个用户,访问我们的队列,如果队列中有就取数据,队列中没有就友好返回
+5,当用户取出数据,确认订单支付时,我们把确认的数据持久化到数据库中
+6,依次执行,当队列中没有数据时,直接友好提示并返回下次再来.
+中间件
+solr实现 SolrClient
+比模糊查询速度快
+ 分词器就是ＩＫＡｎａｌｙｚｅｒ中文分词器，它有细粒度切分和智能切分，即根据某种智能算法。
+ luncence实现了倒排索引技术\
+普通域查询 复制域查询 动态域查询 分页查询 分组查询 高亮查询 过滤查询 区间查询 排序查询
+redis和memacache区别
+1 数据类型me只有string
+2 持久化模式 R:RDB,AOF  M:不安全
+3 R支持主从模式
+4 value最大限制1G   M最大1mb
+5 M并发理由cas算法保证数据一致性  R 保证事物中操作一致
+6 redis支持备份 M挂掉后无法恢复
+redis理解
+Redis 也经常用来做分布式锁。除此之外，Redis 支持事务 、持久化、LUA脚本、LRU驱动事件、多种集群方案。
+首先redis是可以做数据库,缓存和消息队列,key-value结构进行储存.
+数据类型有string,list,hash,set,zset
+pexpire 设置key失效时间
+redis的事务
+Multi:都会开启事务
+Exec:提交
+Discard 回滚
+数据类型特点
+1 string
+此类型和memcache相似，作为常规的key-value缓存应用。
+例如微博数、粉丝数等
+注：一个键最大能存储512MB
+2 hash
+redis hash是一个string类型的field和value的映射表，hash特别适合用于存储对象(应为对象可能会包含很多属性)
+常用命令：hget hset hgetall
+主要用来存储对象信息
+3 list
+list列表是简单的字符串列表，按照插入顺序排序(内部实现为LinkedList)，可以选择将一个链表插入到头部或尾部
+常用命令 :lpush（添加左边元素）,rpush,lpop（移除左边第一个元素）,rpop,lrange（获取列表片段，LRANGE key start stop）等。
+应用场景：Redis list的应用场景非常多，也是Redis最重要的数据结构之一，比如twitter的关注列表，粉丝列表等都可以用Redis的list结构来实现。
+4 set
+案例：在微博中，可以将一个用户所有的关注人存在一个集合中，将其所有粉丝存在一个集合。Redis还为集合提供了求交集、并集、差集等操作，可以非常方便的实现如共同关注、共同喜好、二度好友等功能，对上面的所有集合操作，你还可以使用不同的命令选择将结果返回给客户端还是存集到一个新的集合中。
+5 zset
+常用命令：zadd,zrange
+实现方式：Redis sorted set的内部使用HashMap和跳跃表(SkipList)来保证数据的存储和有序，HashMap里放的是成员到score的映射，跳跃表按score从小到大保存所有集合元素。使用跳跃表的结构可以获得比较高的查找效率，并且在实现上比较简单。时间复杂度与红黑树相同，增加、删除的操作较为简单。
+输入方式
+应用场景：排行榜
+
+redis分布式锁
+SETNX 是『SET if Not eXists』(如果不存在，则 SET)的简写
+为了防止获取锁后程序出现异常，导致其他线程/进程调用SETNX命令总是返回0而进入死锁状态，需要为该key设置一个“合理”的过期时间,释放锁，使用DEL命令将锁数据删除
+
+Spring Quartz
+定时任务重复执行
+1,用redis分布式锁任务在执行前先去redis里设置一个标识，多个应用设置标识，只有一个会返回true，然后才执行真正的定时任务。
+项目应用场景
+视频客服 
+锁定客服资源60s，等待用户接入  key为会话id（uuid）
+门店id作为锁的key 
+1,首先尝试获取锁 获取到执行业务
+2,在有锁的情况下执行业务 无锁不执行
+3,在会话中断也会释放锁
+4,在会话结束也会释放锁
+kafuka MQ
+1.应用场景
+RabbitMQ,遵循AMQP协议，由内在高并发的erlanng语言开发，用在实时的对可靠性要求比较高的消息传递上。
+kafka是Linkedin于2010年12月份开源的消息发布订阅系统,它主要用于处理活跃的流式数据,大数据量的数据处理上。
+.在架构模型
+  ● RabbitMQ遵循AMQP协议，RabbitMQ的broker由Exchange,Binding,queue组成，其中exchange和binding组成了消息的路由键；客户端Producer通过连接channel和server进行通信，Consumer从queue获取消息进行消费（长连接，queue有消息会推送到consumer端，consumer循环从输入流读取数据）。rabbitMQ以broker为中心；有消息的确认机制。
+  ● kafka遵从一般的MQ结构，producer，broker，consumer，以consumer为中心，消息的消费信息保存的客户端consumer上，consumer根据消费的点，从broker上批量pull数据；无消息确认机制。
+3.吞吐量
+  ● kafka具有高的吞吐量，内部采用消息的批量处理，zero-copy机制，数据的存储和获取是本地磁盘顺序批量操作，具有O(1)的复杂度，消息处理的效率很高。
+  ● rabbitMQ在吞吐量方面稍逊于kafka，他们的出发点不一样，rabbitMQ支持对消息的可靠的传递，支持事务，不支持批量的操作；基于存储的可靠性的要求存储可以采用内存或者硬盘。
+4.可用性
+  ● rabbitMQ支持miror的queue，主queue失效，miror queue接管。
+  ● kafka的broker支持主备模式。
+5.集群负载均衡
+  ● kafka采用zookeeper对集群中的broker、consumer进行管理，可以注册topic到zookeeper上；通过zookeeper的协调机制，producer保存对应topic的broker信息，可以随机或者轮询发送到broker上；并且producer可以基于语义指定分片，消息发送到broker的某分片上。
+  ● rabbitMQ的负载均衡需要单独的loadbalancer进行支持。
+
+
+spring框架
+AOP理解
+定义切入点
+定义通知 @Around
+在需要添加切面的方法上添加切入点
+
+在执行方法过后添加日志信息
+1 获取用户信息
+2 获取ip
+3 获取方法签名
+4 获取目标类
+5 获取目标方法上的注解
+6 读取注解的属性值
+7 获取目标方法,和参数
+8 完成日志对象封装
+9 返回执行结果
+Spring Bean生命周期
+  1. 实例化 Instantiation
+  2. 属性赋值 Populate
+  3. 初始化 Initialization
+  4. 销毁 Destruction
+实例化 -> 属性赋值 -> 初始化 -> 销毁
+主要逻辑都在doCreate()
+  1. createBeanInstance() -> 实例化
+  2. populateBean() -> 属性赋值
+  3. initializeBean() -> 初始化
+缓存的Aop实现
+ReadWriteLockLruCache<CacheKey,Object> cacheMap
+ =new ReadWriteLockLruCache<>(3); 
+
+1,定义一个唯一的key(类名加方法名加参数名)定义一个工具类CacheKey
+2,获取到目标类,方法和参数
+3,封装到这个工具类CacheKey
+4,首先先从这个缓存中获取,如果有就直接返回
+5,如果没有就执行目标方法,
+6,并将结果放入缓存中
+
+
+安全框架
+shiro理解
+它是一个安全矿建,实现用户的认证,授权,加密,会话管理等,使用shiro快速完成认证,授权等开发,降低系统成本
+1)Subject（主体）:与软件交互的一个特定的实体（用户、第三方服务等）。
+2)SecurityManager(安全管理器) :Shiro 的核心，用来协调管理组件工作。
+3)Authenticator(认证管理器):负责执行认证操作
+4)Authorizer(授权管理器):负责授权检测
+5)SessionManager(会话管理):负责创建并管理用户 Session 生命周期，提供一个强有力的 Session 体验。
+6)SessionDAO:代表 SessionManager 执行 Session 持久（CRUD）动作，它允许任何存储的数据挂接到 session 管理基础上。
+7)CacheManager（缓存管理器）:提供创建缓存实例和管理缓存生命周期的功能
+8)Cryptography(加密管理器):提供了加密方式的设计及管理。
+9)Realms(领域对象):是shiro和你的应用程序安全数据之间的桥梁。
+
+
+网络
+
+cookie清除怎么办
+策略1:实现URL重写技术.
+例子:http://www.jt.com/cart/addCart?sessionId=XXXXXXX
+步骤:
+1.生成SessionId
+2.将SessionId保存到域中.
+3.发起请求时动态获取SessionId进行url拼接.
+ 问题:
+1.每次发请求都需要进行数据的拼接.
+2.业务层,必须先获取SessionId,之后保存到域中.每个方法都需要添加该操作.
+ b,如何进行url重写。
+encodeURL方法用在链接地址、表单提交地址。
+response.encodeURL(String url);
+encodeRedirectURL方法用于重定向地址。
+response.encodeRedirectURL(String url);
+tcp/udp
+1、TCP面向连接（如打电话要先拨号建立连接）;UDP是无连接的，即发送数据之前不需要建立连接
+2、TCP提供可靠的服务。也就是说，通过TCP连接传送的数据，无差错，不丢失，不重复，且按序到达;UDP尽最大努力交付，即不保   证可靠交付
+3、TCP面向字节流，实际上是TCP把数据看成一连串无结构的字节流;UDP是面向报文的
+  UDP没有拥塞控制，因此网络出现拥塞不会使源主机的发送速率降低（对实时应用很有用，如IP电话，实时视频会议等）
+4、每一条TCP连接只能是点到点的;UDP支持一对一，一对多，多对一和多对多的交互通信
+5、TCP首部开销20字节;UDP的首部开销小，只有8个字节
+6、TCP的逻辑通信信道是全双工的可靠信道，UDP则是不可靠信道
+TCP/IP：四层模型。
+①网络接口层：对应物理层和数据链路层。
+②网络层
+③传输层
+④应用层：包括会话层、表示层、应用层。
+（1）OSI：七层模型。
+①物理层：在物理信道上实现原始比特流的传输。(以太网,?IEEE 802.2 等)
+②数据链路层：实现无差错地将数据帧从一个节点传送到下一个相邻节点。（Wi-Fi(IEEE 802.11) , WiMAX(IEEE 802.16), ?GPRS, HDLC, PPP 等协议）
+③网络层：实现将数据分组从源站通过网络传送到目的站，即网络上一台主机与另一台主机之间的数据传输。(IP, ICMP, IGMP, ARP, RARP, OSPF 等协议)
+④传输层：实现源端到目的端数据的传输，即某主机的某进程与另一台主机的某进程之间的数据传输。(TCP, UDP 等协议)
+⑤会话层：实现在不同机器上用户建立、维护和终止会话关系。即会话层对会话提供控制管理服务、会话同步服务等。（ZIP, ASP, SSH 等协议）
+⑥表示层：确保各种通信设备能够互相操作，不及考虑其数据的内部表示。即确保即使各种通信设备其数据的内部表示不同，但仍然能相互正确操作。(SSL等协议)
+⑦应用层：使用户能够访问网络，为各类应用提供相应的服务、提供各种用户接口支持服务。应用层不是应用程序，应用层是一个为应用程序提供各类应用支持的服务层。（HTTP, FTP, SMTP, POP3, DHCP, DNS等协议）
+http请求到响应的过程
+1. 域名解析 
+2. 发起TCP的3次握手 
+3. 建立TCP连接后发起http请求 
+4. 服务器端响应http请求，浏览器得到html代码 
+5. 浏览器解析html代码，并请求html代码中的资源 
+6. 浏览器对页面进行渲染呈现给用户
+
+
+
+java基础
+设计模式
+门面模式
+1,对外提供接口
+2,但是实际应用的是它的实现类
+3,比如controller调用service,调dao接口
+模板
+mybatis
+sqlSessionTemplate模板方法模式
+策略模式
+资源获取,加载文件
+Resource
+getResource
+classpathResource 类路径
+urlResource 从网络获取
+FileResource 文件路径
+Aop策略模式
+基于对象是否实现了接口 jdk策略如果实现了接口jdk
+没有实现就用cglib
+代理模式 
+AopProxy
+命令模式:DispatcherServlet(发号指令的一个对象)
+工厂模式
+sqlsessionFactory
+适配器模式HandlerInterceptorAdapter  勾子方法交给子类有选择性的实现方法
+public class MonitorIntorceptor implements HandlerInterceptor{
+	@Override
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+			throws Exception {
+		long startTime =System.currentTimeMillis();
+		request.setAttribute("startTime", startTime);
+		return true;
+	}
+	//控制层执行之后
+	@Override
+	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
+			ModelAndView modelAndView) throws Exception {
+		long endTime =System.currentTimeMillis();
+		long startTime = (long) request.getAttribute("startTime");
+		System.out.println("执行时长"+(endTime-startTime));		
+	}
+
+	@Override
+	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
+			throws Exception {
+		// TODO Auto-generated method stub	
+	}
+}
+建造者设计模式
+SqlSessionFactoryBuilder 的build方法 创建出DefaultSqlSessionFactory
+需要BasicProperties对象,创建BasicProperties对象需要很多参数
+创建新的类buider,负责创建basicProperties对象
+BasicProperties.Builder builder=new Builder();
+将消息保存到硬盘上
+builder.deliveryMode(2);
+BasicProperties props=builder.build();
+ * 此种设计一般我们称之为单例设计:(单例模式)
+ 1)此类不能在外界直接构建对象：构造方法私有化
+ * 2)此类要对外提供一个对象(有且仅有一个，具备全局唯一性)
+ * 2.1)在类的内部构建对象
+ * 2.2)对外提供一个全局访问点
+ * 
+创建线程的3中方式
+1 继承tread 
+优点 : 编写简单,访问当前线程直接用this即可获得
+缺点 : 继承thread 就不能继承其他类
+2 实现runable接口
+优点 : 可以继承其他类.多个线程可以共享同一个目标
+缺点 : 没有返回值,而且不能抛出异常
+3 实现callable接口 中的call方法有返回值
+优点 : 有返回值,可以抛出异常
+缺点 : 使用复杂
+线程安全
+“原子性”、“可见性"以及“有序性”
+sleep和wait
+从使用角度看，sleep是Thread线程类的方法，而wait是Object顶级类的方法。
+sleep可以在任何地方使用，而wait只能在同步方法或者同步块中使用。
+CPU及资源锁释放
+sleep,wait调用后都会暂停当前线程并让出cpu的执行时间，但不同的是sleep不会释放当前持有的对象的锁资源，
+到时间后会继续执行，而wait会放弃所有锁并需要notify/notifyAll后重新获取到对象锁资源后才能继续执行。
+异常捕获
+sleep需要捕获或者抛出异常，而wait/notify/notifyAll不需要。
+
+list
+arrayList
+linkedList
+hashmap
+存入键值对时： 
+1.  调用键的hashCode()获得键的哈希值
+key.hashCode()
+2.  用键的哈希值和数组容量，来计算一个下标值 i
+3.  新建 Entry 对象，来封装键值对数据
+4.  Entry对象，放入 i 位置
+1)  空位置，直接放入
+2)  有数据，依次用equals()方法比较是否相等
+a)  找到相等的，覆盖值
+b)  没有相等的，链表连在一起
+  负载率、加载因子到 0.75
+数据的数量/容量
+  新建翻倍长度的新数组
+  所有数据，从新执行哈希运算，存入新数组
+  jdk1.8
+  链表长度到8，转成红黑树
+  数据删除，减少到6，转回成链表
+hashMap和hashTable区别
+线程安全问题
+Hashtable 是不允许键或值为 null 的，HashMap 的键值则都可以为 null。
+因为Hashtable在我们put 空值的时候会直接抛空指针异常，但是HashMap却做了特殊处理。
+这是因为Hashtable使用的是安全失败机制（fail-safe），这种机制会使你此次读到的数据不一定是最新的数据。
+如果你使用null值，就会使得其无法判断对应的key是不存在还是为空，因为你无法再调用一次contain(key）来对key是否存在进行判断，ConcurrentHashMap同理。
+  ● 实现方式不同：Hashtable 继承了 Dictionary类，而 HashMap 继承的是 AbstractMap 类。
+Dictionary 是 JDK 1.0 添加的，貌似没人用过这个，我也没用过。
+  ● 初始化容量不同：HashMap 的初始容量为：16，Hashtable 初始容量为：11，两者的负载因子默认都是：0.75。
+  ● 扩容机制不同：当现有容量大于总容量 * 负载因子时，HashMap 扩容规则为当前容量翻倍，Hashtable 扩容规则为当前容量翻倍 + 1。
+  ● 迭代器不同：HashMap 中的 Iterator 迭代器是 fail-fast 的，而 Hashtable 的 Enumerator 不是 fail-fast 的。
+所以，当其他线程改变了HashMap 的结构，如：增加、删除元素，将会抛出ConcurrentModificationException 异常，而 Hashtable 则不会。
+快速失败（fail—fast）是java集合中的一种机制， 在用迭代器遍历一个集合对象时，如果遍历过程中对集合对象的内容进行了修改（增加、删除、修改），则会抛出Concurrent Modification Exception。
+迭代器在遍历时直接访问集合中的内容，并且在遍历过程中使用一个 modCount 变量。
+集合在被遍历期间如果内容发生变化，就会改变modCount的值。
+每当迭代器使用hashNext()/next()遍历下一个元素之前，都会检测modCount变量是否为expectedmodCount值，是的话就返回遍历；否则抛出异常，终止遍历。
+Tip：这里异常的抛出条件是检测到 modCount！=expectedmodCount 这个条件。如果集合发生变化时修改modCount值刚好又设置为了expectedmodCount值，则异常不会抛出。
+因此，不能依赖于这个异常是否抛出而进行并发操作的编程，这个异常只建议用于检测并发修改的bug。
+
+
+concrenthashmap
+线程安全，且效率比较快，只在写上加了锁的，批量操作
+一、使用volatile保证当Node中的值变化时对于其他线程是可见的
+二、使用table数组的头结点作为synchronized的锁来保证写操作的安全
+三、当头结点为null时，使用CAS操作来保证数据能正确的写入。
+put操作的还是比较复杂的，大致可以分为以下步骤：
+  1. 根据 key 计算出 hashcode 。
+  2. 判断是否需要进行初始化。
+  3. 即为当前 key 定位出的 Node，如果为空表示当前位置可以写入数据，利用 CAS 尝试写入，失败则自旋保证成功。
+  4. 如果当前位置的 hashcode == MOVED == -1,则需要进行扩容。
+  5. 如果都不满足，则利用 synchronized 锁写入数据。
+  6. 如果数量大于 TREEIFY_THRESHOLD 则要转换为红黑树。
+
+熔断机制   ( 线程池)底层原理
+hystrix的原理其实是在服务和请求之前增加了一个线程池，原理其实就是用户的请求将不再直接访问服务，而是通过线程池中的空闲线程来访问服务，如果线程池已满，则会进行降级处理，用户的请求不会被阻塞，至少可以看到一个执行结果（例如返回友好的提示信息），而不是无休止的等待或者看到系统崩溃。
+熔断器是位于线程池之前的组件。用户请求某一服务之后，Hystrix会先经过熔断器，此时如果熔断器的状态是打开（跳起），则说明已经熔断，这时将直接进行降级处理，不会继续将请求发到线程池。熔断器相当于在线程池之前的一层屏障。每个熔断器默认维护10个bucket ，每秒创建一个bucket ，每个blucket记录成功,失败,超时,拒绝的次数。当有新的bucket被创建时，最旧的bucket会被抛弃。
+Closed：熔断器关闭状态，调用失败次数积累，到了阈值（或一定比例）则启动熔断机制；
+Open：熔断器打开状态，此时对下游的调用都内部直接返回错误，不走网络，但设计了一个时钟选项，默认的时钟达到了一定时间（这个时间一般设置成平均故障处理时间，也就是MTTR），到了这个时间，进入半熔断状态；
+Half-Open：半熔断状态，允许定量的服务请求，如果调用都成功（或一定比例）则认为恢复了，关闭熔断器，否则认为还没好，又回到熔断器打开状态；
+锁和线程池
+线程池Executor.CachedThreadPool  execute()执行线程  shutdown()方法
+创建任务需要的线程数量,它在回收旧线程会停止创建线程
+Executor.FixedThreadPool() 创建有数量的线程 不浪费空间
+SingleThreadExecutor
+synchronized
+synchronized 对对象进行加锁，在 JVM 中，对象在内存中分为三块区域：对象头（Header）、实例数据（Instance
+Data）和对齐填充（Padding）。
+针对 synchronized 获取锁的方式，JVM 使用了锁升级的优化方式，就是先使用偏向锁优先同一线程然后再次获取锁，如果失败，就升级为 CAS 轻量级锁，如果失败就会短暂自旋，防止线程被系统挂起。最后如果以上都失败就升级为重量级锁。
+Volatile
+每个线程操作数据的时候会把数据从主内存读取到自己的工作内存，如果他操作了数据并且写会了，他其他已经读取的线程的变量副本就会失效了，需要都数据进行操作又要再次去主内存中读取了。
+volatile保证不同线程对共享变量操作的可见性，也就是说一个线程修改了volatile修饰的变量，当修改写回主内存时，另外一个线程立即看到最新的值。
+缓存一致性协议有MSI、MESI（IllinoisProtocol）、MOSI、Synapse、Firefly及DragonProtocol等。
+MESI
+当CPU写数据时，如果发现操作的变量是共享变量，即在其他CPU中也存在该变量的副本，会发出信号通知其他CPU将该变量的缓存行置为无效状态，因此当其他CPU需要读取这个变量时，发现自己缓存中缓存该变量的缓存行是无效的，那么它就会从内存重新读取。
+嗅探特点
+每个处理器通过嗅探在总线上传播的数据来检查自己缓存的值是不是过期了，当处理器发现自己缓存行对应的内存地址被修改，就会将当前处理器的缓存行设置成无效状态，当处理器对这个数据进行修改操作的时候，会重新从系统内存中把数据读到处理器缓存里。
+缺点 总线风暴 
+由于Volatile的MESI缓存一致性协议，需要不断的从主内存嗅探和cas不断循环，无效交互会导致总线带宽达到峰值。
+所以不要大量使用Volatile，至于什么时候去使用Volatile什么时候使用锁，根据场景区分。
+指令重排
+一般重排序可以分为如下三种：
+  ● 编译器优化的重排序。编译器在不改变单线程程序语义的前提下，可以重新安排语句的执行顺序;
+  ● 指令级并行的重排序。现代处理器采用了指令级并行技术来将多条指令重叠执行。如果不存在数据依赖性，处理器可以改变语句对应机器指令的执行顺序;
+  ● 内存系统的重排序。由于处理器使用缓存和读/写缓冲区，这使得加载和存储操作看上去可能是在乱序执行的。
+as-if-serial
+不管怎么重排序，单线程下的执行结果不能被改变。
+编译器、runtime和处理器都必须遵守as-if-serial语义。
+总结
+  1. volatile修饰符适用于以下场景：某个属性被多个线程共享，其中有一个线程修改了此属性，其他线程可以立即得到修改后的值，比如booleanflag;或者作为触发器，实现轻量级同步。
+  2. volatile属性的读写操作都是无锁的，它不能替代synchronized，因为它没有提供原子性和互斥性。因为无锁，不需要花费时间在获取锁和释放锁_上，所以说它是低成本的。
+  3. volatile只能作用于属性，我们用volatile修饰属性，这样compilers就不会对这个属性做指令重排序。
+  4. volatile提供了可见性，任何一个线程对其的修改将立马对其他线程可见，volatile属性不会被线程缓存，始终从主 存中读取。
+  5. volatile提供了happens-before保证，对volatile变量v的写入happens-before所有其他线程后续对v的读操作。
+  6. volatile可以使得long和double的赋值是原子的。
+  7. volatile可以在单例双重检查中实现可见性和禁止指令重排序，从而保证安全性。
+
+volatile与synchronized的区别
+1 volatile只能修饰实例变量和类变量，而synchronized可以修饰方法，以及代码块。
+2 volatile保证数据的可见性，但是不保证原子性(多线程进行写操作，不保证线程安全);而synchronized是一种排他(互斥)的机制。
+3 volatile用于禁止指令重排序：可以解决单例双重检查对象初始化代码执行乱序问题。
+4 volatile可以看做是轻量版的synchronized，volatile不保证原子性，但是如果是对一个共享变量进行多个线程的赋值，而没有其他的操作，那么就可以用volatile来代替synchronized，因为赋值本身是有原子性的，而5 volatile又保证了可见性，所以就可以保证线程安全了。
+
+
+CountDownLunch即可实现计数操作，等待所有线程执行完毕后主线程开始执行；
+Semaphore即可控制共享资源的最大线程数，通过semaphore.acquire()来获取访问许可；通过semaphore.release()来释放许可；
+(1)CyclicBarrier的某个线程运行到某个点上之后，该线程即停止运行，直到所有的线程都到达了这个点，所有线程才重新运行；CountDownLatch则不是，某线程运行到某个点上之后，只是给某个数值-1而已，该线程继续运行
+（2）CyclicBarrier只能唤起一个任务，CountDownLatch可以唤起多个任务
+（3）CyclicBarrier可重用，CountDownLatch不可重用，计数值为0该CountDownLatch就不可再用了
+
+string stringBufer stringBuilder
+1、String是Java语言非常基础和重要的类，提供了构造和管理字符串的各种基本逻辑。它是典型的Immutable类，被声明成为fnal class，所有属性也都是fnal的。也由于它的不可 变性，类似拼接、裁剪字符串等动作，都会产生新的String对象。由于字符串操作的普遍性，所以相关操作的效率往往对应用性能有明显影响。
+2、StringBufer是为解决上面提到拼接产生太多中间对象的问题而提供的一个类，我们可以用append或者add方法，把字符串添加到已有序列的末尾或者指定位置。StringBufer本 质是一个线程安全的可修改字符序列，它保证了线程安全，也随之带来了额外的性能开销，所以除非有线程安全的需要，不然还是推荐使用它的后继者，也就是StringBuilder。
+3、StringBuilder是Java 1.5中新增的，在能力上和StringBufer没有本质区别，但是它去掉了线程安全的部分，有效减小了开销，是绝大部分情况下进行字符串拼接的首选。
+4、应用场景
+（1）在字符串内容不经常发生变化的业务场景优先使用String类。例如:常量声明、少量的字符串拼接操作等。如果有大量的字符串内容拼接，避免使用String与String之间的“+”操作，因为这样会产生大量无用的中间对象，耗费空间且执行效率低下(新建对象、回收对象花费大量时间)。
+（2）在频繁进行字符串的运算(如拼接、替换、删除等)，并且运行在多线程环境下，建议使用StringBufer，例如XML解析、HTTP参数解析与封装。
+（3）在频繁进行字符串的运算(如拼接、替换、删除等)，并且运行在单线程环境下，建议使用StringBuilder，例如SQL语句拼装、JSON封装等。
+
+java虚拟机的栈和堆
+类的加载指的是将类的.class文件中的二进制数据读入到内存中，将其放在运行时数据区的方法区内，然后在堆区创建一个 java.lang.Class对象，用来封装类在方法区内的数据结构。
+说一下堆栈的区别？
+物理地址
+堆的物理地址分配对对象是不连续的。因此性能慢些。在GC的时候也要考虑到不连续的分配，所以有各种算法。比如，标记-消除，复制，标记-压缩，分代（即新生代使用复制算法，老年代使用标记——压缩）
+栈使用的是数据结构中的栈，先进后出的原则，物理地址分配是连续的。所以性能快。
+内存分别
+堆因为是不连续的，所以分配的内存是在运行期确认的，因此大小不固定。一般堆大小远远大于栈。
+栈是连续的，所以分配的内存大小要在编译期就确认，大小是固定的。
+存放的内容
+堆存放的是对象的实例和数组。因此该区更关注的是数据的存储
+栈存放：局部变量，操作数栈，返回结果。该区更关注的是程序方法的执行。
+PS：
+静态变量放在方法区
+静态的对象还是放在堆。
+程序的可见度
+堆对于整个应用程序都是共享、可见的。
+栈只对于线程是可见的。所以也是线程私有。他的生命周期和线程相同。
+队列和栈是什么？有什么区别？
+队列和栈都是被用来预存储数据的。
+操作的名称不同。队列的插入称为入队，队列的删除称为出队。栈的插入称为进栈，栈的删除称为出栈。
+可操作的方式不同。队列是在队尾入队，队头出队，即两边都可操作。而栈的进栈和出栈都是在栈顶进行的，无法对栈底直接进行操作。
+操作的方法不同。队列是先进先出（FIFO），即队列的修改是依先进先出的原则进行的。新来的成员总是加入队尾（不能从中间插入），每次离开的成员总是队列头上（不允许中途离队）。而栈为后进先出（LIFO）,即每次删除（出栈）的总是当前栈中最新的元素，即最后插入（进栈）的元素，而最先插入的被放在栈的底部，要到最后才能删除。
+对象创建过程
+new -- 检查类是否类加载--加载--分配内存--规整指针碰撞分配内存--不规整--空闲列表分配--cas或TLAB划分内存--内存初始化
+JVM 调优
+jdk/bin目录
+  ● jconsole：用于对 JVM 中的内存、线程和类等进行监控；
+  ● jvisualvm：JDK 自带的全能分析工具，可以分析：内存快照、线程快照、程序死锁、监控内存的变化、gc 变化等。
+常用的 JVM 调优的参数都有哪些？
+-Xms2g：初始化推大小为 2g；
+-Xmx2g：堆最大内存为 2g；
+-XX:NewRatio=4：设置年轻的和老年代的内存比例为 1:4；
+-XX:SurvivorRatio=8：设置新生代 Eden 和 Survivor 比例为 8:2；
+–XX:+UseParNewGC：指定使用 ParNew + Serial Old 垃圾回收器组合；
+-XX:+UseParallelOldGC：指定使用 ParNew + ParNew Old 垃圾回收器组合；
+-XX:+UseConcMarkSweepGC：指定使用 CMS + Serial Old 垃圾回收器组合；
+-XX:+PrintGC：开启打印 gc 信息；
+-XX:+PrintGCDetails：打印 gc 详细信息。java虚拟机的栈和堆
+
+springBoot
+@SpringBootApplication注解的流程
+@Target(ElementType.TYPE)            // 注解的适用范围，其中TYPE用于描述类、接口（包括包注解类型）或enum声明
+@Retention(RetentionPolicy.RUNTIME)  // 注解的生命周期，保留到class文件中（三个生命周期）
+@Documented                          // 表明这个注解应该被javadoc记录
+@Inherited                           // 子类可以继承该注解
+
+以下为重点
+@SpringBootConfiguration             // 继承了Configuration，表示当前是注解类
+@EnableAutoConfiguration             // 开启springboot的注解功能，springboot的四大神器之一，其借助@import的帮助
+@ComponentScan(excludeFilters = {    // 扫描路径设置（具体使用待确认）
+@Configuration之后，本身其实也是一个IoC容器的配置类。
+@ComponentScan的功能其实就是自动扫描并加载符合条件的组件
+@EnableAutoConfiguration也是借助@Import的帮助，将所有符合自动配置条件的bean定义加载到IoC容器，仅此而已！
+@SpringBootApplication
+@Configuration //配置类
+@PropertySource(value="classpath:/properties/redis.properties")
+@Value
+@Bean
+@Component
+@JsonIgnoreProperties
+@Documented
+@Inherited
+@SpringBootConfiguration
+@EnableAutoConfiguration
+boot启动自动配置流程
+1 SpringBootApplication注解 里有一个 @EnableAutoConfiguration 
+2  @EnableAutoConfiguration  @Import({AutoConfigurationImportSelector.class})
+3 配置注解下, 利用AutoConfigurationImportSelector给容器中导入一些,自动配置的组件
+4 selectImports()方法中的内容 . 发现getAutoConfigurationEntry()方法是这个方法的核心.
+5 getCandidateConfigurations()方法获取了所有的候选自动配置类 .
+6 getCandidateConfigurations () . 其中核心方法是springFactoriesLoader.loadFactoryNames(EnableAutoConfiguration.class , ClassLoader) 
+7 通过SpringFactoriesLoader.loadFactoryNames(EnableAutoConfiguration.class , ClassLoader) . 扫描所有jar包类路径下的 WEB-INF/spring.factories,在把扫描到的这些文件内容一一的包装成properties对象,在从properties中获取到EnableAutoConfigurationes.class类对应的值 ,然后,在把他们添加到容器中,
+简要
+Spring Boot启动的时候会通过@EnableAutoConfiguration注解找到META-INF/spring.factories配置文件中的所有自动配置类，并对其进行加载，而这些自动配置类都是以AutoConfiguration结尾来命名的，它实际上就是一个JavaConfig形式的Spring容器配置类，它能通过以Properties结尾命名的类中取得在全局配置文件中配置的属性.
+
+拦截器的执行顺序:
+1, 正常情况全部放行
+2, 1pre 2pre 2post 1post 2after 1after
+3, 非正常 第一个拦截放行,第二个拦截器拦截
+   1 pre 2 pre 1 after
+   拦截器1放行，拦截器2 preHandle才会执行。
+   拦截器2 preHandle不放行，拦截器2 postHandle和afterCompletion不会执行。
+   只要有一个拦截器不放行，postHandle不会执行。
+3, 第一个拦截器拦截，第二个拦截器拦截
+   拦截器1 preHandle不放行，postHandle和afterCompletion不会执行。
+   拦截器1 preHandle不放行，拦截器2不执行。  
+过滤前-拦截前-Action处理-拦截后-过滤后
+过滤器和拦截器的区别
+过滤器 
+ngInx
+正向代理和反向代理
+正向代理是代理的客户端,而服务端不知道是哪个客户端
+反向代理是代理的服务端,而客户端不知道是哪个服务器
+TimerTask 和 Quartz比较
+精确度和功能
+Quartz可以通过cron表达式精确到特定时间执行，而TimerTask不能。Quartz拥有TimerTask所有的功能
+quartz每次都是新建任务,不影响其他任务 而timer一个任务失败就全部失败
+
+
+MYSQL
+数据库的添加字段
+alter 表 add 字段
+alter 表 modify 字段 类型
+主键索引: 数据列不允许重复，不允许为NULL，一个表只能有一个主键。
+唯一索引: 数据列不允许重复，允许为NULL值，一个表允许多个列创建唯一索引。
+可以通过	     ALTER TABLE table_name ADD UNIQUE (column);
+创建唯一索引
+可以通过 ALTER TABLE table_name ADD UNIQUE (column1,column2);
+创建唯一组合索引
+普通索引: 基本的索引类型，没有唯一性的限制，允许为NULL值。
+可以通过ALTER TABLE table_name ADD INDEX index_name (column);
+创建普通索引
+可以通过ALTER TABLE table_name ADD INDEX index_name(column1, column2, column3);
+创建组合索引
+全文索引： 是目前搜索引擎使用的一种关键技术。
+可以通过ALTER TABLE table_name ADD FULLTEXT (column);创建全文索引
+MySQL 都有哪些引擎
+mysaym       Innodb      DBD
+无事物       事物        页锁
+表锁         行锁
+nnoDB索引是聚簇索引，MyISAM索引是非聚簇索引。
+InnoDB的主键索引的叶子节点存储着行数据，因此主键索引非常高效。
+MyISAM索引的叶子节点存储的是行数据地址，需要再寻址一次才能得到数据。
+InnoDB非主键索引的叶子节点存储的是主键和其他带索引的列数据，因此查询时做到覆盖索引会非常高效。
+MyISAM：以读写插入为主的应用程序，比如博客系统、新闻门户网站。
+Innodb：更新（删除）操作频率也高，或者要保证数据的完整性；并发量高，支持事务和外键。比如OA自动化办公系统。
+事物
+A 原子性 C 一致性  I 隔离性 D 持久性
+在MySQL中隔离性有4种级别，分别是：
+read-uncommitted 读未提交
+read-committed 读提交
+repeatable-read 可重读
+serializable 可串行化
+acid事务隔离级别
+查询一条sql怎么知道有没有加索引
+使用explain ，放在sql前面 explain select * from user
+我们只需要注意一个最重要的type 的信息很明显的提现是否用到索引：
+type结果值从好到坏依次是：
+system > const > eq_ref > ref > fulltext > ref_or_null > index_merge > unique_subquery > index_subquery > range > index > ALL
+mysql怎么避免幻读的隔离级别
+事务ID是递增的。
+使用MVCC（多版本并发控制）。InnoDB为每行记录添加了一个事务ID，每当修改数据时，将当事务ID写入。
+在读取事务开始时，系统会给事务一个当前版本号(事务ID)，事务会读取版本号<=当前版本号的数据，这时就算另一个事务插入一个数据，并立马提交，新插入这条数据的版本号会比读取事务的版本号高，因此读取事务读的数据还是不会变。
+mysql如何实现避免幻读
+1.在快照读读情况下，mysql通过mvcc来避免幻读。
+2.在当前读读情况下，mysql通过next-key来避免幻。
+什么是MVCC
+mvcc全称是multi version concurrent control（多版本并发控制）。mysql把每个操作都定义成一个事务，每开启一个事务，系统的事务版本号自动递增。每行记录都有两个隐藏列：创建版本号和删除版本号
+select：事务每次只能读到创建版本号小于等于此次系统版本号的记录，同时行的删除版本号不存在或者大于当前事务的版本号。
+update：插入一条新记录，并把当前系统版本号作为行记录的版本号，同时保存当前系统版本号到原有的行作为删除版本号。
+delete：把当前系统版本号作为行记录的删除版本号
+insert：把当前系统版本号作为行记录的版本号
+什么是next-key锁
+行锁+GAP间隙锁
+什么是快照读和当前读
+快照读：简单的select操作，属于快照读，不加锁。(当然，也有例外，下面会分析)
+select * from table where ?;
+当前读：特殊的读操作，插入/更新/删除操作，属于当前读，需要加锁。
+select * from table where ? lock in share mode;
+select * from table where ? for update;
+insert into table values (…);
+update table set ? where ?;
+delete from table where ?;
+ORDER BY LIMIT
+带limit的order by查询只保证排序值不同的结果集之前绝对有序，排序值相同的结果不保证顺序。
+在order by指定的排序字段后加一个二级排序字段，保证有序。这样问题就解决了，
+1.优化sql语句
+1.1 尽可能根据主键查询
+1.2 尽可能单表查询,将访问的压力交给tomcat服务器,可以通过集群的方式解决,极大减轻数据库的开销
+①选择最有效率的表名顺序
+数据库的解析器按照从右到左的顺序处理FROM子句中的表名，FROM子句中写在最后的表将被最先处理
+②WHERE子句中的连接顺序
+数据库采用自右而左的顺序解析WHERE子句,根据这个原理,表之间的连接必须写在其他WHERE条件之左,那些可以过滤掉最大数量记录的条件必须写在WHERE子句的之右。
+1.3 如果进行关联查询时,应该提早确定数据,之后关联查询,减少笛卡尔积(关联的次数)
+1.4 少用数据库函数 max/min 分组 hive
+2.添加索引和视图(续表)
+3.添加缓存(Redis/MemCache)
+1.1非关系型数据库
+1.2读写速度快,10万吞吐每秒
+4.定期进行数据转储(将不用的数据,存储到历史表中(银行的流水))
+5.可以使用高性能非关系型数据库储存.(redis/hbase),读写速度快
+6.分库分表(贵/运维)
+2数据库防止数据的丢失？
+在archivelog mode(归档模式)只要其归档日志文件不丢失，就可以有效地防止数据丢失。
+索引 
+B+ Tree索引和Hash索引区别？
+哈希索引适合等值查询，但是无法进行范围查询 
+哈希索引没办法利用索引完成排序 
+哈希索引不支持多列联合索引的最左匹配规则 
+如果有大量重复键值的情况下，哈希索引的效率会很低，因为存在哈希碰撞问题
+聚簇索引、覆盖索引
+ 
+Q：刚刚我们聊到B+ Tree ，那你知道B+ Tree的叶子节点都可以存哪些东西吗？
+A：InnoDB的B+ Tree可能存储的是整行数据，也有可能是主键的值
+Q：那这两者有什么区别吗？ 
+A：（当他问我叶子节点的时候，其实我就猜到他可能要问我聚簇索引和非聚簇索引了）在 InnoDB 里，索引B+ Tree的叶子节点存储了整行数据的是主键索引，也被称之为聚簇索引。而索引B+ Tree的叶子节点存储了主键的值的是非主键索引，也被称之为非聚簇索引
+Q：那么，聚簇索引和非聚簇索引，在查询数据的时候有区别吗？
+A：聚簇索引查询会更快？
+Q：为什么呢？ 
+A：因为主键索引树的叶子节点直接就是我们要查询的整行数据了。而非主键索引的叶子节点是主键的值，查到主键的值以后，还需要再通过主键的值再进行一次查询
+Q：刚刚你提到主键索引查询只会查一次，而非主键索引需要回表查询多次。（后来我才知道，原来这个过程叫做回表）是所有情况都是这样的吗？非主键索引一定会查询多次吗？
+A：（额、这个问题我回答的不好，后来我自己查资料才知道，通过覆盖索引也可以只查询一次）
+ 
+覆盖索引？
+覆盖索引（covering index）指一个查询语句的执行只用从索引中就能够取得，不必从数据表中读取。也可以称之为实现了索引覆盖。
+当一条查询语句符合覆盖索引条件时，MySQL只需要通过索引就可以返回查询所需要的数据，这样避免了查到索引后再返回表操作，减少I/O提高效率。
+如，表covering_index_sample中有一个普通索引 idx_key1_key2(key1,key2)。
+当我们通过SQL语句：select key2 from covering_index_sample where key1 = 'keytest';的时候，就可以通过覆盖索引查询，无需回表。
+
+Q：那你知道在MySQL 5.6中，对索引做了哪些优化吗？ 
+Index Condition Pushdown（索引下推）
+MySQL 5.6引入了索引下推优化，默认开启，使用SET optimizer_switch = 'index_condition_pushdown=off';可以将其关闭。官方文档中给的例子和解释如下：
+people表中（zipcode，lastname，firstname）构成一个索引
+SELECT * FROM people WHERE zipcode='95054' AND lastname LIKE '%etrunia%' AND address LIKE '%Main Street%';
+如果没有使用索引下推技术，则MySQL会通过zipcode='95054'从存储引擎中查询对应的数据，返回到MySQL服务端，然后MySQL服务端基于lastname LIKE '%etrunia%'和address LIKE '%Main Street%'来判断数据是否符合条件。
+如果使用了索引下推技术，则MYSQL首先会返回符合zipcode='95054'的索引，然后根据lastname LIKE '%etrunia%'和address LIKE '%Main Street%'来判断索引是否符合条件。如果符合条件，则根据该索引来定位对应的数据，如果不符合，则直接reject掉。有了索引下推优化，可以在有like条件查询的情况下，减少回表次数。
+
+查询优化器？
+一条SQL语句的查询，可以有不同的执行方案，至于最终选择哪种方案，需要通过优化器进行选择，选择执行成本最低的方案。
+在一条单表查询语句真正执行之前，MySQL的查询优化器会找出执行该语句所有可能使用的方案，对比之后找出成本最低的方案。
+这个成本最低的方案就是所谓的执行计划。优化过程大致如下：
+1、根据搜索条件，找出所有可能使用的索引 
+2、计算全表扫描的代价 
+3、计算使用不同索引执行查询的代价 
+4、对比各种执行方案的代价，找出成本最低的那一个
+索引在怎么情况下会失效
+（1）对列进行计算或者是使用函数，则该列的索引会失效
+（2）不匹配数据类型，会造成索引失效
+（3）where语句中使用了IS NULL或者IS NOT NULL，会造成索引失效
+（4）使用了反向操作，该索引将不起作用
+（5）使用了link操作，索引就将不起作用
+（6）在WHERE中使用OR时，有一个列没有索引，那么其它列的索引将不起作用
+例子
+1、如果每次都需要取到所有表记录，无论如何都必须进行全表扫描了，那么是否加索引也没有意义了。
+2、对非唯一的字段，例如“性别”这种大量重复值的字段，增加索引也没有什么意义。
+3、对于记录比较少的表，增加索引不会带来速度的优化反而浪费了存储空间，
+因为索引是需要存储空间的，而且有个致命缺点是对于update/insert/delete的每次执行，
+字段的索引都必须重新计算更新。所以并不是任何情况下都改建立索引的
+优点
+第一，   通过创建唯一性索引，可以保证数据库表中每一行数据的唯一性。
+第二，   可以大大加快数据的检索速度，这也是创建索引的最主要的原因。
+第三，   可以加速表和表之间的连接，特别是在实现数据的参考完整性方面特别有意义。
+第四，   在使用分组和排序子句进行数据检索时，同样可以显著减少查询中分组和排序的时间。
+第五，   通过使用索引，可以在查询的过程中，使用优化隐藏器，提高系统的性能。
+缺点
+第一，   创建索引和维护索引要耗费时间，这种时间随着数据量的增加而增加。
+第二，   索引需要占物理空间，除了数据表占数据空间之外，每一个索引还要占一定的物理空间，如果要建立聚簇索引，那么需要的空间就会更大。
+第三，   当对表中的数据进行增加、删除和修改的时候，索引也要动态的维护，这样就降低了数据的维护速度。 
+三、创建方向索引的准则
+索引是建立在数据库表中的某些列的上面。因此，在创建索引的时候，应该仔细考虑在哪些列上可以创建索引，在哪些列上不能创建索引。
+一般来说，应该在这些列上创建索引。
+第一，   在经常需要搜索的列上，可以加快搜索的速度；
+第二，   在作为主键的列上，强制该列的唯一性和组织表中数据的排列结构；
+第三，   在经常用在连接的列上，这些列主要是一些外键，可以加快连接的速度；
+第四，   在经常需要根据范围进行搜索的列上创建索引，因为索引已经排序，其指定的范围是连续的；
+第五，   在经常需要排序的列上创建索引，因为索引已经排序，这样查询可以利用索引的排序，加快排序查询时间；
+第六，   在经常使用在WHERE子句中的列上面创建索引，加快条件的判断速度。 
+同样，对于有些列不应该创建索引。一般来说，不应该创建索引的的这些列具有下列特点：
+第一， 对于那些在查询中很少使用或者参考的列不应该创建索引。
+这是因为，既然这些列很少使用到，因此有索引或者无索引，并不能提高查询速度。
+相反，由于增加了索引，反而降低了系统的维护速度和增大了空间需求。
+第二， 对于那些只有很少数据值的列也不应该增加索引。
+这是因为，由于这些列的取值很少，例如人事表的性别列，在查询的结果中，
+结果集的数据行占了表中数据行的很大比例，即需要在表中搜索的数据行的比例很大。
+增加索引，并不能明显加快检索速度。
+第三， 对于那些定义为text, image和bit数据类型的列不应该增加索引。
+这是因为，这些列的数据量要么相当大，要么取值很少。
+第四，当修改性能远远大于检索性能时，不应该创建索引。这是因为，修改性能和检索性能是互相矛盾的。
+当增加索引时，会提高检索性能，但是会降低修改性能。当减少 索引时，会提高修改性能，降低检索性能。
+因此，当修改性能远远大于检索性能时，不应该创建索引。 
+ 视图 
+ 	就是虚拟表,查询引用表,动态生成的,提高数据库数据安全
+	视图的列可以来自不同的表，是表的抽象和在逻辑意义上建立的新关系。
+	视图是由基本表(实表)产生的表(虚表)。
+	视图的建立和删除不影响基本表。
+	对视图内容的更新(添加，删除和修改)直接影响基本表。
+	当视图来自多个基本表时，不允许添加和删除数据。
+  用途：简化sql查询，提高开发效率。如果说还有另外一个用途那就是兼容老的表结构。
+	性能 : 简单还好  复杂多表影响性能
+	修改限制: 建档方面  复杂可能是不可修改
+视图类型
+1.有UNIQUE等集合操作符的视图。
+2.有GROUP BY子句的视图。
+3.有诸如AVG\SUM\MAX等聚合函数的视图。
+4.使用DISTINCT关键字的视图。
+5.连接表的视图
+游标 是系统为用户开设的一个数据缓冲区，存放SQL语句的执行结果
+
+web服务挂起时用什么工具检测
+
+fork join区别  
+
+Tomcat
+conf/server.xml
+<Connector port="8080" protocol="HTTP/1.1" 
+               connectionTimeout="20000" 
+               redirectPort="8443" />
+Connector port链接端口号
+tomcat7 
+配制项
+是bio：protocol=”org.apache.coyote.http11.Http11NioProtocol”
+tomcat8
+NIO  protocol="HTTP/1.1"
+AIO protocol=”org.apache.coyote.http11.Http11AprProtocol”
+bio/nio/aio
+同步阻塞/同步非阻塞/异步非阻塞
+同步阻塞：你到饭馆点餐，然后在那等着，还要一边喊：好了没啊！
+同步非阻塞：在饭馆点完餐，就去遛狗了。不过溜一会儿，就回饭馆喊一声：好了没啊！
+异步阻塞：遛狗的时候，接到饭馆电话，说饭做好了，让您亲自去拿。
+异步非阻塞：饭馆打电话说，我们知道您的位置，一会给你送过来，安心遛狗就可以了。
+BIO方式适用于连接数目比较小且固定的架构，这种方式对服务器资源要求比较高，并发局限于应用中，JDK1.4以前的唯一选择，但程序直观简单易理解。
+•NIO方式适用于连接数目多且连接比较短（轻操作）的架构，比如聊天服务器，并发局限于应用中，编程比较复杂，JDK1.4开始支持。
+•AIO方式使用于连接数目多且连接比较长（重操作）的架构，比如相册服务器，充分调用OS参与并发操作，编程比较复杂，JDK7开始支持。​​
+tomcat容器是如何创建servlet类实例？用到了什么原理？
+当容器启动时，会读取在webapps目录下所有的web应用中的web.xml文件，然后对 xml文件进行解析，并读取servlet注册信息。然后，将每个应用中注册的servlet类都进行加载，并通过 反射的方式实例化。（有时候也是在第一次请求时实例化）
+在servlet注册时加上1如果为正数，则在一开始就实例化，如果不写或为负数，则第一次请求实例化。
+框架 server--service--continer--connector-continer--返回给用户
+
+工作流
+JBPM
+Activiti开发流程
+1,编写流程图(bpmn)安装activity插件
+2,创建流程引擎
+ (1)全局唯一的,所有的流程相关操作都要基于流程引擎
+ (2)初始化流程引擎,会自动创建23张表,跟具体的业务流程无关,关注的是流程的运行轨迹
+3,基于流程引擎部署流程图,获得流程部署对象
+4,基于流程部署对象,启动流程,获得流程实例对象
+ (1)基于同个流程部署对象,可以创建多个不同的流程实例对象,所以流程部署对象可以看成类,而流程实例对象可以看成对象
+5,按照流程图的走向运转,需要每个人物节点,来做处理,决定下一步的流向
+
+
+springCloud各个组件在用的时候有什么缺点不足之处
+
+自己熟悉的技术是什么
+MYSQL 和 redis 事物的区别
+
+分布式事物怎么实现的
+首先是看场景 CAP原则 强一致性还是弱一致性
+C 一致性
+A 可用性
+P 容错性
+BASE理论。
+BA：Basic Available 基本可用
+S：Soft State：柔性状态
+同一数据的不同副本的状态，可以不需要实时一致。
+E：Eventual Consisstency：最终一致性
+同一数据的不同副本的状态，可以不需要实时一致，但一定要保证经过一定时间后仍然是一致的。
+三阶段提交协议 3PC
+mq的问题
+
+
+redis 集群 
