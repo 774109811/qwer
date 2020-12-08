@@ -1,0 +1,16 @@
+1、想在项目名称name 搜索关键词
+in:name spring boot 
+2、在readme中搜索关键词
+in:readme sprig boot
+3、获取start大于3000
+in:name spring boot starts>3000
+4、获取fork大于5000
+fork>5000
+5、设置更新时间
+pushed>2019-09-03
+6、设置编程语言
+language：python
+7、在描述中搜索关键信息
+in:description 爬虫
+8、综合练习
+in:description 爬虫 starts>10000 pushed>2019-01-01
