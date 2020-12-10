@@ -1,0 +1,352 @@
+Xshell
+
+chmod  +x startup-cm.sh 
+
+netstat  -aon -p | grep 80
+
+top -H -p pid 
+
+df -h查看linux系统各分区的使用情况
+df -hl
+
+rpm -qa 查看所有安装的应用
+ 
+
+cat /proc/meminfo查看linux系统内存大小的详细信息，可以查看总内存，剩余内存、可使用内存等信息。
+cat /proc/cpuinfo查看linux系统的CPU型号、类型以及大小，
+查看当前目录每个文件夹的情况：
+du --max-depth=1 -h 
+查看指定目录每个文件夹的情况：
+du --max-depth=1 -h  /data/
+计算指定文件夹大小
+du -sh /data/
+free -m 查看linux系统内存使用量和交换区使用量
+
+
+查看配置修改配置文件
+
+cd /root/software/git2consul-conf/
+git2consul --config-file git2consul.json -e 192.168.1.31 -p 8500
+
+git2consul --config-file /root/software/git2consul-conf/git2consul-cm.json -e 192.168.1.31 -p 8510
+
+查看nginx
+
+cd /usr/local/nginx
+
+cd /root/.jenkins/
+
+df -Th
+tail -fn 100 catalina.out | grep   -- '关键字'查看关键字日志
+
+启动项目
+JVM初始分配的内存由-Xms指定，默认是物理内存的1/64；JVM最大分配的内存由-Xmx指定，默认是物理内存的1/4。
+-Xms 最小分配内存
+nohup 后台运行   --spring.profiles.active=dev  在dev环境下运行    > logs/oauth-server-1.0-SNAPSHOT.jar.log &  运行导出文件日志
+
+nohup java -jar -Xmx512m -Xms512m oauth-server-1.0-SNAPSHOT.jar --spring.profiles.active=dev > logs/oauth-server-1.0-SNAPSHOT.jar.log &
+
+//后台启动tomcat项目
+nohup jspgou-8088/bin/startup.sh &
+
+//杀死进程
+kill -9 pid(进程号)
+kill  $(ps -ef|grep XXXXXX.jar|gawk '$0 !~/grep/ {print $2}' |tr -s '\n' ' ')
+
+//查砍状态
+ps -aux|grep tomcat
+//查看日志
+tail -f car-center-1.0-SNAPSHOT.jar.log 
+
+jps -l  查看java当前进程
+
+ps -aux|grep tomcat
+//查看磁盘容量
+df -hl
+//查找文件路径
+find / -name nginx.conf
+
+find / | grep redis-4.0.6
+find / | grep rap
+
+docker images
+
+查看各文件夹大小:du -h --max-depth=1
+
+//停止服务
+net stop RabbitMQ
+
+rabbitmq-server stop
+
+启动gitlab服务
+sudo gitlab-ctl start
+
+gitlab服务停止
+sudo gitlab-ctl stop
+
+重启gitlab服务
+sudo gitlab-ctl restart
+
+redis 启动服务
+redis-server redis-6380.conf 
+
+
+service mysqld start
+
+启动步骤：
+
+1、启动Docker 守护进程
+
+      systemctl daemon-reload
+
+2、Docker启动命令：
+　　systemctl start docker
+3、查看docker服务是否启动
+　　ps -ef |grep docker
+4、查看docker启动的服务：
+     docker ps
+
+sudo docker exec -it 775c7c9ee1e1 /bin/bash   进入容器
+exit 退出
+其他：
+重启docker服务
+systemctl restart docker
+停止docker服务
+systemctl stop docker
+docker ps
+查看所有容器
+docker ps -a
+加载镜像
+docker load -i    demo.tar
+docker ps -h
+删除容器
+docker rm b9c1
+重启
+docker restart b9c1
+
+docker start b9c1
+
+docker reopen aece
+
+docker stop b9c1
+
+docker ps -a | grep java
+
+docker attach --sig-proxy=false rabbit-management
+docker exec -it  rabbit-management bash
+docker exec -it elasticsearch bash
+
+docker pull elasticsearch:6.7.2
+
+docker logs -f 70
+docker stop $(docker ps -a | awk '{ print $1}' | tail -n +2)
+
+
+docker run -d -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" elasticsearch:6.7.2
+docker run -d --name elasticsearch -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" elasticsearch:7.3.0
+
+
+docker run --name 容器名 -i -t -p 主机端口:容器端口 -d -v 主机目录:容器目录:ro 镜像ID或镜像名:TAG
+--name 指定容器的名字
+-i 以交互的模式运行容器
+-t 分配一个伪终端(可以理解成bash命令行)
+-p 端口映射,将主机的端口映射向容器内部的端口
+-d 后台运行
+-v 将主机目录(全路径)挂载到容器的目录中,比如可以让容器中的软件读取宿主机上的配置文件(默认rw读写,ro只读)
+-v 注意它进行的目录级别的挂载,在使用-v启动容器之前,确保将容器目录中的配置文件拷贝到主机目录下
+-v 根据需求修改主机目录配置文件,再启动时,容器会去主机目录下读取配置文件
+-i -t 通常都被简写成-it, 容器中必须运行一个进程容器才不会自动退出,通常使用这个-it让容器运行bash,不让他退出
+-v和-p都是可以重复使用的
+
+
+
+nohup java -jar /usr/lib/jenkins/jenkins.war --httpPort=8899 &
+
+curl localhost:9200/_cat/aliases
+
+//nginx
+sudo /usr/local/nginx/sbin/nginx
+sudo /usr/local/nginx/sbin/nginx -s reload
+sudo /usr/local/nginx/sbin/nginx -s stop
+
+rap tomcat 启动  /root/app/rap-
+
+start nginx
+nginx -s reload
+nginx -s stop
+启动：
+
+cd /usr/local/nginx/sbin
+
+./nginx
+
+nginx服务启动后默认的进程号会放在/usr/local/nginx/logs/nginx.pid文件
+
+cat nginx.pid 查看进程号
+
+
+
+关闭：
+
+kill -TERM pid ?快速停止服务
+
+kill -QUIT pid ?平缓停止服务
+
+kill -9 pid ? ? 强制停止服务
+
+
+
+重启：
+
+cd /usr/local/nginx
+
+./nginx -HUP pid
+
+./nginx -s reload
+
+
+另外一些常见的命令：
+
+./nginx -h 查看nginx所有的命令参数
+
+Options:
+?
+-?,-h  : this help
+? 
+-v     : show version and exit
+?
+-V     : show version and configure options then exit
+? 
+-t     : test configuration and exit
+? 
+-T     : test configuration, dump it and exit
+? 
+-q     : suppress non-error messages during configuration testing
+? 
+-s signal     : send signal to a master process: stop, quit, reopen, reload
+? 
+-p prefix     : set prefix path (default: /usr/local/nginx/)
+? 
+-c filename   : set configuration file (default: conf/nginx.conf)
+? 
+-g directives : set global directives out of configuration file
+
+
+
+
+
+./nginx -v ?显示nginx的版本号
+
+./nginx -V ?显示nginx的版本号和编译信息
+
+./nginx -t ?检查nginx配置文件的正确性
+
+./nginx -t ?检查nginx配置文件的正确定及配置文件的详细配置内容
+
+./nginx -s ?向主进程发送信号，如:./nginx -s reload 配置文件变化后重新加载配置文件并重启nginx服务
+
+./nginx -p ?设置nginx的安装路径
+
+./nginx -c ?设置nginx配置文件的路径
+
+
+
+mysql相关命令
+1.启动命令
+
+[root@xufeng Desktop]# service mysqld start
+Redirecting to /bin/systemctl start mysqld.service
+2.关闭命令
+
+[root@xufeng ~]# service mysqld stop
+Redirecting to /bin/systemctl stop mysqld.service
+3.重启命令
+
+[root@xufeng ~]# service mysqld restart
+Redirecting to /bin/systemctl restart mysqld.service
+
+4.查看服务状态
+
+[root@xufeng ~]# service mysqld status
+
+5.查看MySql系统配置
+
+[root@xufeng ~]# cat /etc/my.cnf
+
+yum remove MySQL*  删除所有相关的mysql文件
+
+rpm -qa|grep -i mysql  查看mysql有没有相关的安装
+
+删除命令：rpm -e –nodeps 包名
+# rpm -ev MySQL-client-5.5.25a-1.rhel5
+# rpm -ev MySQL-server-5.5.25a-1.rhel5
+
+3、查找之前老版本mysql的目录、并且删除老版本mysql的文件和库
+find / -name mysql
+查找结果如下：
+[root@localhost ~]# find / -name mysql
+/var/lib/mysql
+/var/lib/mysql/mysql
+/usr/lib64/mysql
+删除对应的mysql目录
+rm -rf /var/lib/mysql
+rm -rf /var/lib/mysql
+rm -rf /usr/lib64/mysql
+
+centos7防火墙
+
+systemctl status firewalld.service  查看防火墙
+systemctl stop firewalld.service 关闭运行的防火墙
+systemctl disable firewalld.service  禁止firewall开机启动
+ozoSMp!P#7M/
+(1)sudo 命令  
+xzm@ubuntu:~$  sudo
+
+这样输入当前管理员用户密码就可以得到超级用户的权限。但默认的情况下5分钟root权限就失效了。
+
+(2)sudo -i
+xzm@ubuntu:~$  sudo -i
+
+通过这种方法输入当前管理员用户的密码就可以进到root用户。
+
+(3)如果想一直使用root权限，要通过su切换到root用户。
+那我们首先要重设置root用户的密码：
+
+xzm@ubuntu:~$  sudo passwd root
+
+这样就可以设置root用户的密码了。
+
+
+(4)之后就可以自由的切换到root用户了
+xzm@ubuntu:~$  su
+
+输入root用户的密码即可。
+
+su "king" 或者 exit回到用户权限
+
+gitlab-ctl stop
+
+
+netstat -ano | findstr 8080：查看8080端口状态
+taskkill /pid 6148 /f：杀掉占用8080端口的6148（不是固定的，每个电脑的都不一样）
+
+
+长马
+docker run --name cm-api-gateway -p 9097:9097 -v /root/api.gateway-1.0-SNAPSHOT.jar:/api.gateway.jar -d java:8-alpine java -jar -Xmx1024m -Xms512m /api.gateway.jar --spring.profiles.active=produce
+docker run --name cm-auth-server -v /root/oauth-server-2.0-SNAPSHOT.jar:/oauth-server.jar -d java:8-alpine java -jar -Xmx1024m -Xms512m /oauth-server.jar --spring.profiles.active=produce
+docker run --name cm-iot-admin  -v /root/iot-admin-2.0-SNAPSHOT.jar:/iot-admin.jar -d java:8-alpine java -jar -Xmx1024m -Xms512m /iot-admin.jar --spring.profiles.active=produce
+docker run --name cm-car-center  -v /root/car-center-2.0-SNAPSHOT.jar:/car-center.jar -d java:8-alpine java -jar -Xmx1024m -Xms512m /car-center.jar --spring.profiles.active=produce
+docker run --name cm-platform  -v /root/platform-2.0-SNAPSHOT.jar:/platform.jar -d java:8-alpine java -jar -Xmx1024m -Xms512m /platform.jar --spring.profiles.active=produce
+
+方法一：如果要正常退出不关闭容器，请按Ctrl+P+Q进行退出容器
+docker exec -it computing-ioc-cmd-8083 /bin/bash 进入容器
+docker  inspect  --format '{{.LogPath}}'   computing-ioc-quartz 查看容器日志地址
+创建容器
+docker create -it --network=host --name=iot-admin -v /opt/iot-admin:/opt huawei_jdk:1.8.0_262  /bin/bash
+#在dockerfile所在目录创建镜像
+docker build -t   jing-image .
+
+
+
+docker安装后默认没有daemon.json这个配置文件，需要进行手动创建。配置文件的默认路径：/etc/docker/daemon.json
+mvn clean install -Dmaven.test.skip=true
