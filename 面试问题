@@ -8,3 +8,33 @@
 一致性（Consistency）	具备	                             具备
 隔离性（Isolation）	具备	                               具备
 持久性（Durability）	具备	                               当redis服务器使用AOF持久化模式并appendfsync设置为always时具备
+	mysql    
+1, 开启一个事务： 
+start transaction; 
+也可以使用“begin; ” 
+2，执行业务中需要保持逻辑一致性的多条语句； 
+insert .....; 
+delete ......; 
+update ......; 
+事务中，其实只是对增删改进行控制，而查询语句，无所谓——因为查询不改变数据； 
+3，判断是否出错并采取相应措施： 
+if （出错）{ 
+rollback;//就是通常所说的“回滚”——就是啥也不做了，就是全部撤销； 
+} 
+else{ 
+commit;//就是通常所说的“提交”——就是全都生效； 
+}
+
+1.mysql实现事务，是基于undo/redo日志
+2.undo记录修改前状态，rollback基于undo日志实现
+3.redo记录修改后的状态，commit基于redo日志实现
+4.在mysql中无论是否开启事务，sql都会被立即执行并返回执行结果，只是事务开启后执行后的状态只是记录在redo日志，执行commit之后，数据才会被写入磁盘
+
+
+redis 
+Multi：标记事务的开始
+Exec：执行事务的commands队列
+Discard：结束事务，并清除commands队列
+批量操作在发送 EXEC 命令前被放入队列缓存。
+收到 EXEC 命令后进入事务执行，事务中任意命令执行失败，其余的命令依然被执行。
+在事务执行过程，其他客户端提交的命令请求不会插入到事务执行命令序列中。
