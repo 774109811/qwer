@@ -33,7 +33,7 @@ commit;//就是通常所说的“提交”——就是全都生效；
 4.在mysql中无论是否开启事务，sql都会被立即执行并返回执行结果，只是事务开启后执行后的状态只是记录在redo日志，执行commit之后，数据才会被写入磁盘
 
 
-redis 
+**redis** 
 Multi：标记事务的开始
 Exec：执行事务的commands队列
 Discard：结束事务，并清除commands队列
